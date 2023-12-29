@@ -109,7 +109,7 @@ catch(Exception e)
             <br><br>
             <div class="middle">
                 <br><br>
-                <h2>Add Your Product Details</h2>
+                <h2>Update Product Details</h2>
                 <hr>
                 <br>
                 <form method="post" action="addproduct" >

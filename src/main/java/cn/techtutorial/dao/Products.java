@@ -43,7 +43,7 @@ public class Products {
 		
 		String url = "jdbc:mysql://localhost:3306/ecommerce_cart";
 		String user = "root";
-		String pwd = "root";
+		String pwd = "1234";
   
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -75,7 +75,7 @@ public class Products {
 	    
 	    String url = "jdbc:mysql://localhost:3306/ecommerce_cart";
 		String user = "root";
-		String pwd = "root";
+		String pwd = "1234";
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
