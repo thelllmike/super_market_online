@@ -33,4 +33,23 @@ public class UserDao {
         }
         return user;
     }
+	
+	public User getUserDetails(int userId) {
+	    User user = new User();
+	    try {
+	        String query = "SELECT name, email FROM ecommerce_cart.users WHERE id = ?";
+	        PreparedStatement pst = con.prepareStatement(query);
+	        pst.setInt(1, userId);
+	        ResultSet rs = pst.executeQuery();
+
+	        if (rs.next()) {
+	            user.setName(rs.getString("name"));
+	            user.setEmail(rs.getString("email"));
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return user;
+	}
+
 }

@@ -96,6 +96,8 @@ if (cart_list != null) {
         }).render('#paypal-button-container');
     </script>
      </div>
+     <%--   https://www.youtube.com/watch?v=7nk6jr4eF4U--%>
+   
     <br><br><br><br><br>
     <%@include file="/includes/footer.jsp"%>
 </body>

@@ -125,5 +125,31 @@ public class ProductDao {
         }
         return book;
     }
+    
+    
+//    public List<Product> getProductsByCategory(String category) {
+//        List<Product> productsByCategory = new ArrayList<>();
+//        try {
+//            query = "SELECT * FROM products WHERE category = ?";
+//            pst = this.con.prepareStatement(query);
+//            pst.setString(1, category);
+//            rs = pst.executeQuery();
+//
+//            while (rs.next()) {
+//                Product product = new Product();
+//                product.setId(rs.getInt("id"));
+//                product.setName(rs.getString("name"));
+//                product.setCategory(rs.getString("category"));
+//                product.setPrice(rs.getDouble("price"));
+//                product.setImage(rs.getString("image"));
+//
+//                productsByCategory.add(product);
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            System.out.println(e.getMessage());
+//        }
+//        return productsByCategory;
+//    }
 
 }
