@@ -11,7 +11,7 @@ public class Register {
 	    // Connect to the database
 	    String url = "jdbc:mysql://localhost:3306/ecommerce_cart";
 	    String user = "root";
-	    String pwd = "root";
+	    String pwd = "1234";
 
 	    try {
 	        Class.forName("com.mysql.cj.jdbc.Driver");

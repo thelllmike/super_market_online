@@ -125,32 +125,5 @@ public class ProductDao {
         }
         return book;
     }
-    //test
-    
-//   public boolean insertProduct(Product product) {
-//        boolean isSuccess = false;
-//        try {
-//            query = "insert into products (name, category, price, image) values (?, ?, ?, ?)";
-//            pst = this.con.prepareStatement(query);
-//            pst.setString(1, product.getName());
-//            pst.setString(2, product.getCategory());
-//            pst.setDouble(3, product.getPrice());
-//            pst.setString(4, product.getImage());
-//
-//            int rowsInserted = pst.executeUpdate();
-//            if (rowsInserted > 0) {
-//                isSuccess = true;
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            System.out.println(e.getMessage());
-//        }
-//        return isSuccess;
-//    }
-//
-//
-//	public static int insertProduct(String name, String category, String price, String image) {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
+
 }
