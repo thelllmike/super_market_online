@@ -1,73 +1,64 @@
 package cn.techtutorial.dao;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
+import java.nio.file.Paths;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-
+import javax.servlet.http.Part;
+import java.io.File;
 
 /**
  * Servlet implementation class addproduct
  */
 @WebServlet("/addproduct")
+@MultipartConfig
 public class addproduct extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+    private static final long serialVersionUID = 1L;
+
     /**
-     * @see HttpServlet#HttpServlet()
+     * Default constructor.
      */
     public addproduct() {
-        super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name = request.getParameter("name");
+        String category = request.getParameter("category");
+        String price = request.getParameter("price");
+        
+        // Get the image part
+        Part filePart = request.getPart("image"); // Retrieves <input type="file" name="image">
+        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+        
+        // Defines the path where you want to save the image
+        String savePath = getServletContext().getRealPath("/product-image") + File.separator + fileName;
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-		
-		String name = request.getParameter("name");
-		String category = request.getParameter("category");
-		String price = request.getParameter("price");
-		String image = request.getParameter("image");
-		
+        // Checks if the directories exist
+        File fileSaveDir = new File(savePath);
+        if (!fileSaveDir.exists()) {
+            fileSaveDir.mkdirs();
+        }
 
-	    System.out.println("Received data from frontend:");
-	    System.out.println("Name: " + name);
-	    System.out.println("Category: " + category);
-	    System.out.println("Price: " + price);
-	    System.out.println("Image: " + image);
-		
-		int adb = 3;
-		adb = Products.insertProduct(name, category, price, image);
+        // Saves the file on the server's filesystem
+        filePart.write(savePath + File.separator);
+        
+        // Inserts the product details into the database, using the fileName for the image
+        int adb = Products.insertProduct(name, category, price, fileName);
 
-		if (adb == 1) {
-			// response.sendRedirect("Success.jsp");	
-			RequestDispatcher dis = request.getRequestDispatcher("index.jsp");
-			dis.forward(request, response);
-			System.out.println("Successful");
-		} else if (adb == 0) {
-
-			// response.sendRedirect("unsuccess.jsp");
-			RequestDispatcher dis2 = request.getRequestDispatcher("index.jsp");
-			dis2.forward(request, response);
-			System.out.println("UnSuccessful");
-		}
-	}
-
+        if (adb == 1) {
+            // If insert is successful, redirect or forward to a success page
+            response.sendRedirect("admin.jsp"); // Assuming you have a 'success.jsp' for success messages
+        } else {
+            // If insert is unsuccessful, redirect or forward to an error page
+            response.sendRedirect("unsuccess.jsp"); // Assuming you have an 'unsuccess.jsp' for error messages
+        }
+    }
 }

@@ -17,6 +17,9 @@ if (cart_list != null) {
     request.setAttribute("cart_list", cart_list);
 }
 %>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -105,6 +108,10 @@ if (cart_list != null) {
             text-align: center;
             margin: 0;
         }
+         /* Your existing styles ... */
+        .star-rating .fa {
+            color: #FFD700; /* Star color */
+        }
 </style>
 </head>
 <body>
@@ -116,22 +123,22 @@ if (cart_list != null) {
   <!-- Features Section -->
     <div class="features-section">
         <div class="feature-item">
-            <img src="images/icon1.jpg" alt="Best Prices & Offers">
+            <img src="images/icon1.png" alt="Best Prices & Offers">
             <h4>Best Prices & Offers</h4>
             <p>Cheaper prices than your local supermarket.</p>
         </div>
         <div class="feature-item">
-            <img src="images/icon2.jpg" alt="Get groceries delivered">
+            <img src="images/icon2.png" alt="Get groceries delivered">
             <h4>Get groceries delivered</h4>
             <p>We will deliver your groceries direct to your door.</p>
         </div>
         <div class="feature-item">
-            <img src="images/icon3.jpg" alt="More payment options">
+            <img src="images/icon3.png" alt="More payment options">
             <h4>More payment options</h4>
             <p>Now you can Pay Online, by Cash on Delivery or Card on Delivery</p>
         </div>
         <div class="feature-item">
-            <img src="images/icon4.jpg" alt="Wide assortment">
+            <img src="images/icon4.png" alt="Wide assortment">
             <h4>Wide Assortment</h4>
             <p>Choose from 5000+ products across food, personal care, household & other categories.</p>
         </div>
@@ -167,22 +174,34 @@ if (cart_list != null) {
 
 
 
-    <div class="container">
+ <div class="container">
         <div class="card-header my-3">All Products</div>
         <div class="row">
             <%
             if (!products.isEmpty()) {
                 for (Product p : products) {
+                    double rating = p.getRating(); // Use double as per your Product class
             %>
             <div class="col-md-3 my-3">
                 <div class="card w-100">
-                    <img class="card-img-top" src="product-image/<%=p.getImage() %>"
-                        alt="Card image cap">
+                    <img class="card-img-top" src="product-image/<%=p.getImage() %>" alt="<%=p.getName()%>">
                     <div class="card-body">
                         <h5 class="card-title"><%=p.getName() %></h5>
                         <h6 class="price">Price: $<%=p.getPrice() %></h6>
                         <h6 class="category">Category: <%=p.getCategory() %></h6>
-                        <!-- Star rating and buttons omitted for brevity -->
+                        <div class="star-rating">
+                            <% for(int i = 1; i <= 5; i++) { %>
+                                <% if(i <= (int)rating) { %>
+                                    <span>&#9733;</span> <!-- Filled star -->
+                                <% } else { %>
+                                    <span>&#9734;</span> <!-- Empty star -->
+                                <% } %>
+                            <% } %>
+                        </div>
+                        <div class="mt-3 d-flex justify-content-between">
+                            <a class="btn btn-dark" href="add-to-cart?id=<%=p.getId()%>">Add to Cart</a>
+                            <a class="btn btn-primary" href="order-now?quantity=1&id=<%=p.getId()%>">Buy Now</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -195,13 +214,9 @@ if (cart_list != null) {
         </div>
     </div>
 
-    <!-- Container for product images at the bottom -->
-    <div class="product-images">
-        <!-- Repeat for each product image -->
-        <img src="path-to-product-image.jpg" alt="Product description" class="product-image">
-        <!-- More product images -->
-    </div>
 
+
+ 
     <%@include file="/includes/footer.jsp"%>
 </body>
 </html>

@@ -29,7 +29,6 @@ if (cart_list != null) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-  <body>
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="home.jsp">Home</a>
@@ -37,16 +36,13 @@ if (cart_list != null) {
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-       
+            <!-- Place your navbar items here -->
         </nav>
         <div class="hole">
-            <br><br>
             <div class="middle">
-                <br><br>
                 <h2>Add Your Product Details</h2>
                 <hr>
-                <br>
-                <form method="post" action="addproduct" >
+                <form method="post" action="addproduct" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="name" class="form-label">Product Name</label>
                         <input type="text" class="form-control" id="name" name="name" required>
@@ -64,47 +60,18 @@ if (cart_list != null) {
 
                     <div class="mb-3">
                         <label for="image" class="form-label">Image</label>
-                        <input type="file" class="form-control" id="image" name="image" accept="image/*" >
+                        <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
                     </div>
 
                     <button type="submit" class="btn btn-primary" name="submit">Add Product</button>
                 </form>
             </div>
-
-            <div class="card-header my-3">All Products</div>
-            <div class="row">
-                <%
-                if (!products.isEmpty()) {
-                    for (Product p : products) {
-                %>
-                <div class="col-md-3 my-3">
-                    <div class="card w-100">
-                        <img class="card-img-top" src="product-image/<%=p.getImage() %>"
-                             alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title"><%=p.getName() %></h5>
-                            <h6 class="price">Price: $<%=p.getPrice() %></h6>
-                            <h6 class="category">Category: <%=p.getCategory() %></h6>
-                            <div class="mt-3 d-flex justify-content-between">
-                                <a class="btn btn-dark" href="add-to-cart?id=<%=p.getId()%>">Add to Cart</a>
-                                <a class="btn btn-primary" href="order-now?quantity=1&id=<%=p.getId()%>">Buy Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <%
-                    }
-                } else {
-                    out.println("There is no products");
-                }
-                %>
-            </div>
+            <!-- Your code for displaying products goes here -->
         </div>
     </div>
 
     <!-- Include Bootstrap JS and Popper.js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-<%@include file="/includes/footer.jsp"%>
+    <%@include file="/includes/footer.jsp"%>
 </body>
 </html>
