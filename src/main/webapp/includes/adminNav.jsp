@@ -15,6 +15,7 @@
 				<%
 				if (auth != null) {
 				%>
+					<li class="nav-item"><a class="nav-link" href="addProduct.jsp">Add Product</a></li>
 				<li class="nav-item"><a class="nav-link" href="adminProductView.jsp">Product View</a></li>
 						<li class="nav-item"><a class="nav-link" href="adminUsersView.jsp">User View</a></li>
 						<li class="nav-item"><a class="nav-link" href="adminOrderView.jsp">Oder View</a></li>

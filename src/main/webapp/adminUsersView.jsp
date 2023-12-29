@@ -49,7 +49,7 @@ if (auth != null) {
                         try {
                             Class.forName("com.mysql.cj.jdbc.Driver"); // Use the new driver class
                             String userName = "root";
-                            String password = "root";
+                            String password = "1234";
                             String url = "jdbc:mysql://localhost:3306/ecommerce_cart";
                             Connection con = DriverManager.getConnection(url, userName, password);
                             Statement stat = con.createStatement();

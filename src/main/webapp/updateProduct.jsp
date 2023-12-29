@@ -47,7 +47,7 @@ try
 {
 	Class.forName("com.mysql.jdbc.Driver");
 	String userName = "root";
-	String password = "root";
+	String password = "1234";
 	String url = "jdbc:mysql://localhost:3306/ecommerce_cart";
 	Connection con = DriverManager.getConnection(url,userName,password);
     Statement stat = con.createStatement();  

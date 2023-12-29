@@ -21,7 +21,7 @@ if (cart_list != null) {
 <html>
 <head>
 <%@include file="/includes/head.jsp"%>
-<title>Supermarket</title>
+<title>GREEN Supermarket</title>
 <style>
     .star-rating {
         display: inline-block;
